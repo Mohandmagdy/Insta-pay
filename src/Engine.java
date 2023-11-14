@@ -18,13 +18,17 @@ public class Engine {
         int choice2 = scanner.nextInt();
         if (choice2 == 1) {
             BankRegisteration b = new BankRegisteration();
-            if (b.Register()) {
+            if (b.Register())
                 System.out.println("Account created Successfully");
-            } else {
+            else
                 return false;
-            }
+
         } else if (choice2 == 2) {
-            new WalletRegisteration().Register();
+            WalletRegisteration w = new WalletRegisteration();
+            if(w.Register())
+                System.out.println("Account created Successfully");
+            else
+                return false;
         }
         return true;
     }
