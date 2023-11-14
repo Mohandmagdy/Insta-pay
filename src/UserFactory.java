@@ -7,5 +7,7 @@ public class UserFactory {
         return new walletUser(lst.get(0),lst.get(1),lst.get(2),lst.get(3) , Double.parseDouble(lst.get(4)) ) ;
     }
 
+
+
 }
 

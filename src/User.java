@@ -5,6 +5,7 @@ public abstract class User {
 
     protected String phone;
 
+    User(){};
     User(String username, String password , String phoneNumber) {
         this.username = username;
         this.password = password;

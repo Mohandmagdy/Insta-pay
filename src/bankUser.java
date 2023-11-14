@@ -1,5 +1,7 @@
 public class bankUser extends User {
     bankPayment card;
+
+    bankUser(){};
     bankUser(String username, String password , String phone , String bankNumber , String registeredPhoneNumber , double amount ) {
         super(username, password, phone);
         card = new bankPayment(bankNumber, registeredPhoneNumber , amount);

@@ -9,6 +9,10 @@ public class Engine {
         authentication = Authentication.getInstance();
     }
 
+    public void Try(){
+
+    }
+
     public void run(){
         // display menu
 
@@ -21,7 +25,7 @@ public class Engine {
             int choice = scanner.nextInt();
 
             if(choice==1){
-                
+
             }
 
             else if(choice == 2){
@@ -29,10 +33,12 @@ public class Engine {
                 System.out.println("2-Register as WalletUser");
                 int choice2 = scanner.nextInt();
                 if(choice2 == 1){
-
+                 BankRegisteration b =  new BankRegisteration();
+                 if(b.Register())System.out.println("Account created Successfully");
+                  break;
                 }
                 else if(choice==2){
-
+                 new WalletRegisteration().Register();
                 }
             }
             else {
@@ -45,6 +51,9 @@ public class Engine {
         List<String> lst = authentication.login() ;
         currentUser = userFactory.getCurrentUser(lst);
     }
+
+
+
 
 
 
