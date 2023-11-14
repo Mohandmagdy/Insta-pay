@@ -3,8 +3,9 @@ import java.util.Scanner;
 public class WalletRegisteration extends RegisterationService {
     public String WalletNumber;
 
-    WalletRegisteration(){};
-
+    WalletRegisteration(){
+        db = DatabaseService.getInstance();
+    };
 
     @Override
     public boolean Register() {
@@ -12,17 +13,6 @@ public class WalletRegisteration extends RegisterationService {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter WalletNumber : ");
         this.WalletNumber = scanner.nextLine();
-        if(db.checkUser(this.username)){
-            System.out.println("username "+this.username+" alredy exits !");
-            return false;
-        }
-        else {
-            db.addUser(this);
-            return true;
-        }
-    }
-
-    public void mohamed(){
-        System.out.println("gg");
+        return true;
     }
 }
