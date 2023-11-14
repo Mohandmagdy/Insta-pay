@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 public class DatabaseService {
@@ -37,12 +38,58 @@ public class DatabaseService {
 
     }
 
+    public List<String> login(String user, String pwd){
+        List<String> user_details = new ArrayList<>();
+        try{
+            // Create a statement
+            PreparedStatement pstmt = this.connection.prepareStatement("SELECT * FROM Users WHERE username = ? and password= ? ");
+            pstmt.setString(1, user);
+            pstmt.setString(2, pwd);
 
+            // Execute the query
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                int type = rs.getInt("type");
+                rs.close();
+                pstmt.close();
+                user_details.add(user);
+                user_details.add(pwd);
+                if(type==1){
+                    pstmt = this.connection.prepareStatement("SELECT * FROM BankUser WHERE UserID = ?");
+                    pstmt.setString(1, user);
+                    rs = pstmt.executeQuery();
 
+                    if(rs.next()){
+                        user_details.add(rs.getString("BankNumber"));
+                        user_details.add(rs.getString("registeredPhoneNumber"));
+                        user_details.add(String.valueOf(rs.getDouble("amount")));
+                        pstmt.close();
+                        rs.close();
+                    }
 
-    public boolean login(String username, String password){
-        // check if valid username and password
-        return true ;
+                 return null;
+                }
+                else{
+                    pstmt = this.connection.prepareStatement("SELECT * FROM WalletUser WHERE UserID = ?");
+                    pstmt.setString(1, user);
+                    if(rs.next()) {
+                        user_details.add(rs.getString("WalletNumber"));
+                        user_details.add(String.valueOf(rs.getDouble("amount")));
+                        pstmt.close();
+                        rs.close();
+                    }
+
+                    return null;
+
+                }
+            }
+
+            return user_details;
+
+        }
+        catch (SQLException e) {
+            throw new IllegalStateException("error in the database!", e);
+        }
     }
 
     public void addUser(RegisterationService b){
@@ -105,10 +152,11 @@ public class DatabaseService {
             // Execute the query
             ResultSet rs = pstmt.executeQuery();
 
-            // Process the result set
-            boolean exist = rs.next();
+            // Process the result
 
-            if (rs.next()) {
+            boolean exists = rs.next();
+
+            if (exists) {
                 return true;
             } else {
                 return false;
@@ -122,13 +170,7 @@ public class DatabaseService {
 
 
 
-    public List<String> getUser(String username) {
-        List<String> user = new ArrayList<>();
 
-        // make query using the username to get the rest of information
-
-        return user;
-    }
 
     ;
     

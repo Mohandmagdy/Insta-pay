@@ -10,6 +10,8 @@ public class BankRegisteration  extends RegisterationService{
        db = DatabaseService.getInstance();
     }
 
+
+
     @Override public boolean Register(){
         super.Register();
         Scanner scanner = new Scanner(System.in);
@@ -17,12 +19,14 @@ public class BankRegisteration  extends RegisterationService{
         this.BankNumber = scanner.nextLine();
         System.out.println("Enter Registered_Phone : ");
         this.Registered_Phone = scanner.nextLine();
-        if(db.checkUser(username)){
-            System.out.println("username "+username+" alredy exits !");
+        if(db.checkUser(this.username)){
+            System.out.println("username "+this.username+" alredy exits !");
             return false;
         }
-        db.addUser(this);
-        return true;
+        else {
+            db.addUser(this);
+            return true;
+        }
 
     }
 

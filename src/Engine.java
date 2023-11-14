@@ -9,10 +9,19 @@ public class Engine {
         authentication = Authentication.getInstance();
     }
 
-    public void Try(){
 
+    public void Register(int option){
+        if(option == 1){
+            BankRegisteration b =  new BankRegisteration();
+            //if(b.Register())System.out.println("Account created Successfully");
+            b.dd("honda","hondav1");
+            return;
+        }
+        else if(option==2){
+            new WalletRegisteration().Register();
+            return;
+        }
     }
-
     public void run(){
         // display menu
 
@@ -32,14 +41,7 @@ public class Engine {
                 System.out.println("1-Register as BankUser");
                 System.out.println("2-Register as WalletUser");
                 int choice2 = scanner.nextInt();
-                if(choice2 == 1){
-                 BankRegisteration b =  new BankRegisteration();
-                 if(b.Register())System.out.println("Account created Successfully");
-                  break;
-                }
-                else if(choice==2){
-                 new WalletRegisteration().Register();
-                }
+                Register(choice2);
             }
             else {
                 break;
@@ -47,14 +49,10 @@ public class Engine {
 
         }
     }
+
     void login() {
         List<String> lst = authentication.login() ;
         currentUser = userFactory.getCurrentUser(lst);
     }
-
-
-
-
-
 
 }
