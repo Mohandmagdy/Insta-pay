@@ -50,10 +50,12 @@ public class DatabaseService {
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()){
                 int type = rs.getInt("type");
+                String Phone = rs.getString("phone");
                 rs.close();
                 pstmt.close();
                 user_details.add(user);
                 user_details.add(pwd);
+                user_details.add(Phone);
                 if(type==1){
                     pstmt = this.connection.prepareStatement("SELECT * FROM BankUser WHERE UserID = ?");
                     pstmt.setString(1, user);
@@ -72,6 +74,7 @@ public class DatabaseService {
                 else{
                     pstmt = this.connection.prepareStatement("SELECT * FROM WalletUser WHERE UserID = ?");
                     pstmt.setString(1, user);
+                    rs = pstmt.executeQuery();
                     if(rs.next()) {
                         user_details.add(rs.getString("WalletNumber"));
                         user_details.add(String.valueOf(rs.getDouble("amount")));

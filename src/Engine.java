@@ -43,7 +43,7 @@ public class Engine {
         return true;
     }
 
-    private void showServices(){
+    private boolean showServices(){
         Scanner scanner = new Scanner(System.in);
         if (currentUser instanceof bankUser){
             System.out.println("1- transfer to wallet");
@@ -55,6 +55,7 @@ public class Engine {
             //write response code
             if(choice == 5){
                 //logout
+                return false;
             }
         } else{
             System.out.println("1- transfer to wallet");
@@ -65,8 +66,11 @@ public class Engine {
             //write response code
             if(choice == 4){
                 //logout
+                return false;
             }
         }
+
+        return true;
     }
 
     public void run() {
@@ -84,7 +88,7 @@ public class Engine {
                 if (login()) {
                     System.out.println("Welcome " + currentUser.getUsername());
                     while(true) {
-                        showServices();
+                        if(!showServices())break;
                     }
                 }
             } else if (choice == 2) {
