@@ -12,19 +12,15 @@ public class Authentication {
         }
         return authentication ;
     }
-
-
     public List<String> login(){
-        String username = ""  , password = "" ;
+        String username, password;
+        System.out.println("Please enter your username and password");
+        System.out.print("Username: ");
+        Scanner myScanner = new Scanner((System.in));
+        username = myScanner.nextLine();
+        System.out.print("Password: ");
+        password = myScanner.nextLine();
 
-        // print menu and get username and password
-
-        if (db.login(username, password)) {
-            return db.getUser(username);
-        }
-        else return new ArrayList<>() ;
+        return db.login(username, password);
     }
-
-
-
 }
