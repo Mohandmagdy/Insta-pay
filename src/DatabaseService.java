@@ -46,11 +46,50 @@ public class DatabaseService {
     }
 
     public void addUser(RegisterationService b){
+        try{
+        PreparedStatement pstmt = this.connection.prepareStatement("INSERT INTO Users (username, password,phone,type) VALUES (?, ?,?,?)");
+        pstmt.setString(1, b.username);
+        pstmt.setString(2, b.password);
+        pstmt.setString(3, b.phone);
+        int type = (b instanceof BankRegisteration ? 1 : 0);
+        pstmt.setInt(4, type);
+        // Execute the query
+        pstmt.executeUpdate();
+        // Close the connections
+        pstmt.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
        if(b instanceof BankRegisteration)  {
-           System.out.println("bank");
+           try{
+               PreparedStatement pstmt = this.connection.prepareStatement("INSERT INTO BankUser (UserID, BankNumber,registeredPhoneNumber,amount) VALUES (?,?,?,?)");
+               System.out.println(b.username );
+               pstmt.setString(1, b.username);
+               pstmt.setString(2, ((BankRegisteration) b).BankNumber);
+               pstmt.setString(3, ((BankRegisteration) b).Registered_Phone);
+               pstmt.setDouble(4, (Math.random()*10000)+350);
+               // Execute the query
+               pstmt.executeUpdate();
+               // Close the connections
+               pstmt.close();
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
        }
        else if(b instanceof WalletRegisteration){
-           System.out.println("wallet");
+           try{
+               PreparedStatement pstmt = this.connection.prepareStatement("INSERT INTO WalletUser (UserId, walletNumber,amount) VALUES (?, ?,?)");
+               pstmt.setString(1, b.username);
+               pstmt.setString(2, ((WalletRegisteration) b).WalletNumber);
+               pstmt.setDouble(3, (Math.random()*10000)+350);
+
+               // Execute the query
+               pstmt.executeUpdate();
+               // Close the connections
+               pstmt.close();
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
        }
        else{
            System.out.println("btngan");
@@ -70,9 +109,9 @@ public class DatabaseService {
             boolean exist = rs.next();
 
             if (rs.next()) {
-                return false;
-            } else {
                 return true;
+            } else {
+                return false;
             }
 
         }

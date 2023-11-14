@@ -13,7 +13,6 @@ public class WalletRegisteration extends RegisterationService {
         System.out.println("Enter WalletNumber : ");
         this.WalletNumber = scanner.nextLine();
         return true;
-
     }
 
     public void mohamed(){

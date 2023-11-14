@@ -21,6 +21,7 @@ public class BankRegisteration  extends RegisterationService{
             System.out.println("username "+username+" alredy exits !");
             return false;
         }
+        db.addUser(this);
         return true;
 
     }
