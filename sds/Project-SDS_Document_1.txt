@@ -1,0 +1,46 @@
+          Cairo University	                                          Faculty of Computers and Artificial Intelligence
+  
+
+
+
+Software design specification document
+2023
+Project Team
+ID	Name	Email
+20210350	Mohamed Kamal Mohamed	mk5391130@gmail
+20210412	Mohanad Magdy Ahmed	mohandmagdii45@gmail.com
+20210475
+20210416 	Yousef Abdalla Attia
+Momen Mostafa Mabrouk	yabdalla463@gmail.com
+momenmostafa585@gmail.com
+
+
+
+Class diagram design
+
+
+
+Class diagram Explanation
+   
+ 
+Design Pattern 
+1.using fa‡ade in engine class . 
+2.using factory design pattern in createUser & createBill. 
+3.using strategy pattern in payment and API. 
+Sequence diagram design
+Registeration Sequence
+
+ 
+
+PayBill Sequence
+ 
+Login Sequence
+ 
+Transferbank Sequence
+
+ 
+Github repository link
+https://github.com/Mohandmagdy/Insta-pay
+
+
+URL for your repository, should contains implemented services,
