@@ -20,13 +20,23 @@ public class walletPayment extends payment{
 
     @Override
     public void pay(API myAPI , String username){
+        Scanner scanner = new Scanner(System.in);
+
         double amount = super.getAmount() ;
-        if (amount < 0 || amount > balance) {
-            System.out.println("your balance is not enough to pay " + amount ) ;
+        if ( amount > balance) {
+            System.out.println("your balance is not enough to complete the transfer " + amount ) ;
+            return;
+        }
+        if ( amount <= 0) {
+            System.out.println("invalid amount to transfer" ) ;
+            return;
         }
 
-        String accountNumber = super.getAccountNumber() ;
-        if (!myAPI.transfer( username , accountNumber , amount ) )
+        System.out.println("Enter the " + myAPI.getName() + " number: ") ;
+
+        String accNumber = scanner.nextLine() ;
+
+        if (!myAPI.transfer(username , accNumber , amount ) )
             System.out.println("sorry couldn't complete the transfer");
         else {
             balance -= amount;

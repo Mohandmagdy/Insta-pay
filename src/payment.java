@@ -19,13 +19,5 @@ public abstract class payment {
         double amount = scanner.nextDouble() ;
         return amount ;
     }
-    protected String getAccountNumber(){
-        scanner.nextLine() ;
-        System.out.println("Enter the account ID to send to or the bill id" );
-
-        String acc = scanner.nextLine(); ;
-
-        return acc ;
-    }
 
 }
