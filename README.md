@@ -8,3 +8,4 @@ Application Features :
 - transfering payment from wallet to wallet
 - transfering between instapay accounts
 - Authentication & validation
+- paying bills
