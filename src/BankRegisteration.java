@@ -31,13 +31,23 @@ public class BankRegisteration  extends RegisterationService{
             this.Registered_Phone = scanner.nextLine();
             if ((reply = validation.isValidRegisteredPhoneNumber(this.Registered_Phone)) != "success") {
                 System.out.println(reply + " Try again");
-            } else {
-                break;
             }
+            break;
         }
 
-        db.addUser(this);
-        return true;
+        OTPService t = new OTPService();
+        if (t.SendOTP(this.phone) != null) {
+            System.out.println("Otp Sent Successfully !");
+            System.out.println("Enter Otp :");
+            String otp = scanner.nextLine();
+            if (!t.verifyOTP(otp)) {
+                System.out.println("Wrong Otp !");
+                return false;
+            }
+        }
+            db.addUser(this);
+            return true;
+
     }
 
 

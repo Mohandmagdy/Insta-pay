@@ -39,6 +39,8 @@ public abstract class RegisterationService {
             if ((reply = validation.isValidPhoneNumber(this.phone)) != "success") {
                 System.out.println(reply + " Try again");
             } else {
+                // country code
+                this.phone="2"+this.phone;
                 break;
             }
         }
