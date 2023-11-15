@@ -1,9 +1,9 @@
 public abstract class User {
     protected String username;
     protected String password;
-
-
     protected String phone;
+
+    protected payment card;
 
     User(){};
     User(String username, String password , String phoneNumber) {
@@ -35,5 +35,19 @@ public abstract class User {
 
     public String getPhone() {
         return phone;
+    }
+    public void makeWalletPayment() {
+        card.pay(new walletApi() , username);
+    }
+
+    public void makeInstaPay() {
+        card.pay(new instPayApi() , username);
+    }
+
+    public void makeBillPayment() {
+        card.pay(new BillApi() , username);
+    }
+    public double getBalance() {
+        return card.getBalance();
     }
 }

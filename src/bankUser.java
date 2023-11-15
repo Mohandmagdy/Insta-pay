@@ -1,5 +1,4 @@
 public class bankUser extends User {
-    bankPayment card;
 
     bankUser(){};
     bankUser(String username, String password , String phone , String bankNumber , String registeredPhoneNumber , double amount ) {
@@ -8,12 +7,15 @@ public class bankUser extends User {
     }
 
     public String getAccountNumber() {
-        return card.getAccountNumber();
+        return ((bankPayment)card).getAccountNumber();
     }
 
 
     public void setBankNumber(String bankNumber) {
-        this.card.setAccountNumber(bankNumber);
+        ((bankPayment)card).setAccountNumber(bankNumber);
     }
 
+    public void makeBankPayment(){
+        ((bankPayment)card).pay(new bankApi() , username );
+    }
 }

@@ -1,6 +1,9 @@
-public class bankApi implements API {
+public class bankApi extends API {
 
-    public boolean verifyPayment(payment paymentMethod) {
-        return paymentMethod instanceof bankPayment;
+
+    @Override
+    public  boolean transfer(String senderAccount, String receiverAccount, double amount) {
+        db.updateBalance(senderAccount , amount);
+        return true;
     }
 }

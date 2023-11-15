@@ -45,30 +45,41 @@ public class Engine {
 
     private boolean showServices(){
         Scanner scanner = new Scanner(System.in);
+        System.out.println("0- logout");
+        System.out.println("1- transfer to insta Pay account");
+        System.out.println("2- pay bills");
+        System.out.println("3- inquire balance");
+        System.out.println("4- transfer to wallet");
+
         if (currentUser instanceof bankUser){
-            System.out.println("1- transfer to wallet");
-            System.out.println("2- transfer to bank");
-            System.out.println("3- transfer to insta Pay account");
-            System.out.println("4- pay bills");
-            System.out.println("5- logout");
-            int choice = scanner.nextInt();
-            //write response code
-            if(choice == 5){
-                //logout
-                return false;
-            }
-        } else{
-            System.out.println("1- transfer to wallet");
-            System.out.println("2- transfer to insta Pay account");
-            System.out.println("3- pay bills");
-            System.out.println("4- logout");
-            int choice = scanner.nextInt();
-            //write response code
-            if(choice == 4){
-                //logout
-                return false;
-            }
+            System.out.println("5- transfer to bank");
         }
+
+        int choice = scanner.nextInt();
+        if (choice>5 || choice < 0) {
+            System.out.println("Invalid choice , please try again") ;
+            return true;
+        }
+        switch (choice) {
+            case 0:
+                return false ;
+            case 1:
+                currentUser.makeInstaPay();
+                break ;
+            case 2:
+                currentUser.makeBillPayment();
+                break;
+            case 3:
+                System.out.println("your account balance is : " + currentUser.getBalance()) ;
+                break;
+            case 4:
+                currentUser.makeWalletPayment();
+                break;
+            case 5:
+                if (currentUser instanceof bankUser)
+                    ((bankUser)currentUser).makeBankPayment() ;
+        }
+
 
         return true;
     }

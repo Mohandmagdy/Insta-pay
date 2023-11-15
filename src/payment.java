@@ -1,6 +1,8 @@
+import java.util.Scanner;
+
 public abstract class payment {
     double balance;
-
+    Scanner scanner = new Scanner(System.in);
     public double getBalance() {
         return balance;
     }
@@ -9,10 +11,21 @@ public abstract class payment {
         this.balance = balance;
     }
 
-    public abstract void transferToInstaPay(String username);
+    public abstract void pay(API myAPI , String username) ;
 
-    public abstract void payBill(String bill_ID);
+    protected double getAmount(){
 
-    public abstract void transfer(payment receiver);
+        System.out.println("Enter the amount you want to transfer or pay" );
+        double amount = scanner.nextDouble() ;
+        return amount ;
+    }
+    protected String getAccountNumber(){
+        scanner.nextLine() ;
+        System.out.println("Enter the account ID to send to or the bill id" );
+
+        String acc = scanner.nextLine(); ;
+
+        return acc ;
+    }
 
 }

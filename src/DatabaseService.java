@@ -33,7 +33,6 @@ public class DatabaseService {
         if (instance == null) {
             instance = new DatabaseService();
         }
-
         return instance;
 
     }
@@ -168,5 +167,45 @@ public class DatabaseService {
             throw new IllegalStateException("Cannot connect to the database!", e);
         }
     }
-    ;
+    public void updateBalance( String userName , double amount ){
+
+        String query1 = "SELECT type FROM Users WHERE username = ?";
+        String query2 = "UPDATE %s SET amount = ? WHERE UserID = ?";
+        String query3 = "SELECT amount FROM %s WHERE UserID = ?";
+
+
+        try{
+            PreparedStatement selectStatement = this.connection.prepareStatement(query1);
+            selectStatement.setString(1, userName);
+
+            ResultSet rs = selectStatement.executeQuery() ;
+            int isBankUser = 0 ;
+            if (rs.next())
+                isBankUser = rs.getInt("type") ;
+
+            String tableName = ( (isBankUser > 0) ? "BankUser" : "WalletUser");
+
+            query3 = String.format(query3, tableName);
+            query2 = String.format(query2, tableName);
+
+            PreparedStatement selectStatement2 = this.connection.prepareStatement(query3);
+
+            selectStatement2.setString(1, userName);
+
+            ResultSet rs2 = selectStatement2.executeQuery() ;
+            double currentBalance = 0 ;
+            if (rs2.next())
+                currentBalance = rs2.getDouble("amount");
+
+            PreparedStatement updateStatement  = connection.prepareStatement(query2);
+
+            updateStatement.setDouble(1, currentBalance - amount);
+            updateStatement.setString(2, userName);
+            updateStatement.executeUpdate();
+
+        }
+        catch (SQLException e) {
+            throw new IllegalStateException("Cannot connect to the database!", e);
+        }
+    }
 }

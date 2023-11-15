@@ -1,17 +1,16 @@
 public class walletUser extends User {
-    walletPayment wallet;
 
     walletUser(String username, String password , String phone ,  String walletNumber , double amount){
         super(username, password, phone);
-        this.wallet = new walletPayment(walletNumber  , amount);
+        this.card = new walletPayment(walletNumber  , amount);
     }
 
     public walletPayment getWalletNumber() {
-        return wallet;
+        return (walletPayment)this.card;
     }
 
     public void setWalletNumber(walletPayment wallet) {
-        this.wallet = wallet;
+        this.card = wallet;
     }
 
 }

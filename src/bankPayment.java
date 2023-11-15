@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class bankPayment extends payment {
 
@@ -19,9 +20,27 @@ public class bankPayment extends payment {
     }
 
 
-    public  void transferToInstaPay(String username){}
 
-    public  void payBill(String bill_ID){}
+    public void pay(API myAPI , String username ){
+        double amount = super.getAmount() ;
+        if (amount < 0 || amount > balance) {
+            System.out.println("your balance is not enough to pay " + amount ) ;
 
-    public  void transfer(payment receiver){}
+        }
+
+        String accountNumber = super.getAccountNumber() ;
+        if (!myAPI.transfer(username , accountNumber , amount ) )
+            System.out.println("sorry couldn't complete the transfer");
+        else {
+            balance -= amount;
+            System.out.println("the amount transferred your current balance is " +balance );
+        }
+    }
+
+
+//    public boolean payBill() {
+//        System.out.println("Enter the amount you want to pay" );
+//        return true;
+//    }
+
 }
