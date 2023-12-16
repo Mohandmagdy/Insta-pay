@@ -15,9 +15,9 @@ public class DatabaseService {
 
         try {
 
-            String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11661754";
-            String username = "sql11661754";
-            String password = "RZs6ekfgg3";
+            String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11670675";
+            String username = "sql11670675";
+            String password = "z86dSe1zaq";
             Connection connection= DriverManager.getConnection(url, username, password) ;
 
             System.out.println("Connecting to the database...");
